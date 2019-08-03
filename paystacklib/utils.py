@@ -16,3 +16,8 @@ def get_header(secret_key=None):
     bearer = 'Bearer {0}'.format(secret_key)
     header = {'Authorization': bearer, 'Content-Type': 'application/json'}
     return header
+
+
+def clean_params(params):
+    params = {item:params[item] for item in params.keys() if params[item] is not None and item is not 'self'}
+    return params
