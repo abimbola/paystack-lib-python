@@ -19,5 +19,5 @@ def get_header(secret_key=None):
 
 
 def clean_params(params):
-    params = {item:params[item] for item in params.keys() if params[item] is not None and item is not 'self'}
+    params = {item:params[item] for item in params.keys() if params[item] is not None and item is not 'cls'}
     return params
