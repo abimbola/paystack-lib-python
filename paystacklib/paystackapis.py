@@ -4,11 +4,18 @@ from paystacklib.baseapi import BaseApi
 from paystacklib.utils import clean_params
 
 class Transaction(BaseApi):
-    def __init__(self, secret_key=None,uri='https://api.paystack.co/transaction', method=None, headers=None, params=None):
+    def __init__(
+            self, secret_key=None,
+            uri='https://api.paystack.co/transaction', method=None, 
+            headers=None, params=None):
         BaseApi.__init__(self, secret_key, uri, method, headers, params)
 
     @classmethod
-    def initialize(cls, amount, email, callback_url=None, reference=None, plan=None, invoice_limit=None, metadata=None, subaccount=None, transaction_charge=None, bearer=None, channels=None):
+    def initialize(
+            cls, amount, email, 
+            callback_url=None, reference=None, plan=None, 
+            invoice_limit=None, metadata=None, subaccount=None, 
+            transaction_charge=None, bearer=None, channels=None):
         params = locals()
         params = clean_params(params)
         uri = paystacklib.api_base + '/transaction/initialize'
@@ -20,7 +27,10 @@ class Transaction(BaseApi):
         return cls(uri=uri, method = 'get').execute()
 
     @classmethod
-    def list(cls, per_page=50, page=1, customer=None, status=None, fr=None, to=None, amount=None):
+    def list(
+            cls, per_page=50, page=1, 
+            customer=None, status=None, fr=None, 
+            to=None, amount=None):
         params = locals()
         params['from'] = params['fr']
         del params['fr']
@@ -33,7 +43,12 @@ class Transaction(BaseApi):
         return cls(uri=uri, method='get').execute() 
 
     @classmethod    
-    def charge(cls, authorization_code, amount, email, reference=None, plan=None, currency=None, metadata=None, subaccount=None, transaction_charge=None, bearer=None, invoice_limit=None, queue=None):
+    def charge(
+            cls, authorization_code, amount, 
+            email, reference=None, plan=None, 
+            currency=None, metadata=None, subaccount=None, 
+            transaction_charge=None, bearer=None, invoice_limit=None, 
+            queue=None):
         params = locals()
         params = clean_params(params)
         uri = paystacklib.api_base + '/transaction/charge_authorization'
@@ -54,7 +69,10 @@ class Transaction(BaseApi):
         return cls(uri=uri, method='get', params=params).execute()
 
     @classmethod
-    def export(cls, fr=None, to=None, settled=None, payment_page=None, customer=None, currency=None, settlement=None, amount=None, status=None):
+    def export(
+            cls, fr=None, to=None, 
+            settled=None, payment_page=None, customer=None, 
+            currency=None, settlement=None, amount=None, status=None):
         params = locals()
         params['from'] = params['fr']
         del params['fr']
@@ -63,7 +81,8 @@ class Transaction(BaseApi):
         return cls(uri=uri, method='get', params=params).execute()
 
     @classmethod
-    def request_reauthorization(cls, authorization_code, amount, email, reference=None, metadata=None):
+    def request_reauthorization(
+            cls, authorization_code, amount, email, reference=None, metadata=None):
         params = locals()
         params = clean_params(params)
         uri = paystacklib.api_base + '/transaction/request_reauthorization'
