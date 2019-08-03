@@ -82,14 +82,17 @@ class Transaction(BaseApi):
 
     @classmethod
     def request_reauthorization(
-            cls, authorization_code, amount, email, reference=None, metadata=None):
+            cls, authorization_code, amount, 
+            email, reference=None, metadata=None):
         params = locals()
         params = clean_params(params)
         uri = paystacklib.api_base + '/transaction/request_reauthorization'
         return cls(uri=uri, method='post', params=params).execute()
 
     @classmethod
-    def check_authorization(cls, authorization_code, amount, email, currency=None):
+    def check_authorization(
+            cls, authorization_code, amount, 
+            email, currency=None):
         params = locals()
         params = clean_params(params)
         uri = paystacklib.api_base + '/transaction/check_authorization'

@@ -3,7 +3,9 @@ import paystacklib
 from paystacklib.utils import get_header
 
 class BaseApi:
-    def __init__(self, secret_key=None,uri='https://api.paystack.co', method=None, headers=None, params=None):
+    def __init__(
+            self, secret_key=None,uri='https://api.paystack.co', 
+            method=None, headers=None, params=None):
         self.secret_key = paystacklib.secret_key
         self.uri = uri 
         self.method = method
