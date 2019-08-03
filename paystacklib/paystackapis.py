@@ -73,4 +73,20 @@ class Transactions(BaseApi):
         self.params = clean_params(self.params)
         self.uri = self.uri +'/export'
         self.method = 'get'
+        return self.execute()
+
+    def request_reauthorization(self, authorization_code, amount, email, reference=None, metadata=None):
+        self.rebase()
+        self.params = locals()
+        self.params = clean_params(self.params)
+        self.uri = self.uri + '/request_reauthorization'
+        self.method = 'post'
+        return self.execute()
+
+    def check_authorization(self, authorization_code, amount, email, currency=None):
+        self.rebase()
+        self.params = locals()
+        self.params = clean_params(self.params)
+        self.uri = self.uri + '/check_authorization'
+        self.method = 'post'
         return self.execute() 
