@@ -20,6 +20,8 @@ class BaseApi:
             result = req(self.uri, headers=self.headers, params=self.params)
         elif self.method == 'post' or self.method == 'put':
             result = req(self.uri, headers=self.headers, json=self.params)
+        elif self.method == 'delete':
+            result = req(self.uri, headers=self.headers)
         return result.json()
 
 
