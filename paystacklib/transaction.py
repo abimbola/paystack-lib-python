@@ -4,9 +4,10 @@ from paystacklib.baseapi import BaseApi
 from paystacklib.utils import clean_params
 
 class Transaction(BaseApi):
+    object_type = '/transaction'
     def __init__(
             self, secret_key=None,
-            uri='https://api.paystack.co/transaction', method=None, 
+            uri=paystacklib.api_base + object_type, method=None, 
             headers=None, params=None):
         BaseApi.__init__(self, secret_key, uri, method, headers, params)
 
@@ -18,12 +19,13 @@ class Transaction(BaseApi):
             transaction_charge=None, bearer=None, channels=None):
         params = locals()
         params = clean_params(params)
-        uri = paystacklib.api_base + '/transaction/initialize'
+        uri = paystacklib.api_base + cls.object_type + '/initialize'
         return cls(uri=uri, method='post', params=params).execute() 
 
     @classmethod    
     def verify(cls, reference):
-        uri = paystacklib.api_base + '/transaction/verify/{0}'.format(reference)
+        uri = paystacklib.api_base + \
+            '{0}/verify/{1}'.format(cls.object_type, reference)
         return cls(uri=uri, method = 'get').execute()
 
     @classmethod
@@ -35,11 +37,13 @@ class Transaction(BaseApi):
         params['from'] = params['fr']
         del params['fr']
         params = clean_params(params)
+        uri = paystacklib.api_base + cls.object_type
         return cls(method='get', params=params).execute()
 
     @classmethod
     def fetch(cls, transaction_id):
-        uri = paystacklib.api_base + '/transaction/{0}'.format(str(transaction_id))
+        uri = paystacklib.api_base + \
+            '{0}/{1}'.format(cls.object_type, str(transaction_id))
         return cls(uri=uri, method='get').execute() 
 
     @classmethod    
@@ -51,12 +55,13 @@ class Transaction(BaseApi):
             queue=None):
         params = locals()
         params = clean_params(params)
-        uri = paystacklib.api_base + '/transaction/charge_authorization'
+        uri = paystacklib.api_base + cls.object_type + '/charge_authorization'
         return cls(uri=uri, method='post', params=params).execute()
 
     @classmethod
     def timeline(cls, transaction_id):
-        uri = paystacklib.api_base + '/transaction/timeline/{0}'.format(str(transaction_id))
+        uri = paystacklib.api_base + \
+            '{0}/timeline/{1}'.format(cls.object_type, str(transaction_id))
         return cls(uri=uri, method='get').execute()
 
     @classmethod
@@ -65,7 +70,7 @@ class Transaction(BaseApi):
         params['from'] = params['fr']
         del params['fr']
         params = clean_params(params)
-        uri = paystacklib.api_base + '/transaction/totals'
+        uri = paystacklib.api_base + cls.object_type + '/totals'
         return cls(uri=uri, method='get', params=params).execute()
 
     @classmethod
@@ -77,7 +82,7 @@ class Transaction(BaseApi):
         params['from'] = params['fr']
         del params['fr']
         params = clean_params(params)
-        uri = paystacklib.api_base +'/transaction/export'
+        uri = paystacklib.api_base + cls.object_type + '/export'
         return cls(uri=uri, method='get', params=params).execute()
 
     @classmethod
@@ -86,7 +91,8 @@ class Transaction(BaseApi):
             email, reference=None, metadata=None):
         params = locals()
         params = clean_params(params)
-        uri = paystacklib.api_base + '/transaction/request_reauthorization'
+        uri = paystacklib.api_base + cls.object_type + \
+            '/request_reauthorization'
         return cls(uri=uri, method='post', params=params).execute()
 
     @classmethod
@@ -95,5 +101,5 @@ class Transaction(BaseApi):
             email, currency=None):
         params = locals()
         params = clean_params(params)
-        uri = paystacklib.api_base + '/transaction/check_authorization'
+        uri = paystacklib.api_base + cls.object_type + '/check_authorization'
         return cls(uri=uri, method='post', params=params).execute() 
