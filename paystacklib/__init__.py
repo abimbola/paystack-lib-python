@@ -10,3 +10,5 @@ from paystacklib.product import Product
 from paystacklib.plan import Plan
 from paystacklib.transfer import Transfer
 from paystacklib.transferrecipient import TransferRecipient
+from paystacklib.subscription import Subscription
+from paystacklib.verification import Verification
