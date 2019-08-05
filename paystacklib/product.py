@@ -2,6 +2,7 @@
 import paystacklib
 from paystacklib.baseapi import BaseApi
 from paystacklib.utils import clean_params
+import copy
 
 class Product(BaseApi):
     object_type = '/product'
@@ -15,7 +16,7 @@ class Product(BaseApi):
     def create(
             cls, name, description, price, currency, limited=None,
             quantity=None):
-        params = locals()
+        params = copy.deepcopy(locals())
         params = clean_params(params)
         uri = paystacklib.api_base + cls.object_type
         return cls(uri=uri, method='post', params=params).execute() 
@@ -23,7 +24,7 @@ class Product(BaseApi):
 
     @classmethod
     def list(cls):
-        params = locals()
+        params = copy.deepcopy(locals())
         params = clean_params(params)
         uri = paystacklib.api_base + cls.object_type 
         return cls(uri=uri, method='get', params=params).execute()
@@ -38,7 +39,7 @@ class Product(BaseApi):
     def update(
             cls, product_id, name=None, description=None, price=None, currency=None,
             limited=None, quantity=None): 
-        params = locals()
+        params = copy.deepcopy(locals())
         params = clean_params(params)
         uri = paystacklib.api_base + \
             '{0}/{1}'.format(cls.object_type, str(product_id)) 

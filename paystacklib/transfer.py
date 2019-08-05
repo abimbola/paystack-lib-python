@@ -2,6 +2,7 @@
 import paystacklib
 from paystacklib.baseapi import BaseApi
 from paystacklib.utils import clean_params
+import copy
 
 class Transfer(BaseApi):
     object_type = '/transfer'
@@ -14,14 +15,14 @@ class Transfer(BaseApi):
     @classmethod
     def initiate(cls, amount, recipient, source='balance', currency=None,
             reason=None, reference=None): 
-        params = locals()
+        params = copy.deepcopy(locals())
         params = clean_params(params)
         uri = paystacklib.api_base + cls.object_type
         return cls(uri=uri, method='post', params=params).execute() 
 
     @classmethod
     def list(cls, perPage=None, page=None):
-        params = locals()
+        params = copy.deepcopy(locals())
         params = clean_params(params)
         uri = paystacklib.api_base + cls.object_type 
         return cls(uri=uri, method='get', params=params).execute()
@@ -34,7 +35,7 @@ class Transfer(BaseApi):
 
     @classmethod    
     def finalize(cls, transfer_code, otp):
-        params = locals()
+        params = copy.deepcopy(locals())
         params = clean_params(params)
         uri = paystacklib.api_base + cls.object_type + '/finalize_transfer' 
         return cls(uri=uri, method='post', params=params).execute()
