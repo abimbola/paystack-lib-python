@@ -12,3 +12,5 @@ from paystacklib.transfer import Transfer
 from paystacklib.transferrecipient import TransferRecipient
 from paystacklib.subscription import Subscription
 from paystacklib.verification import Verification
+from paystacklib.refund import Refund
+from paystacklib.bank import Bank
