@@ -14,3 +14,4 @@ from paystacklib.subscription import Subscription
 from paystacklib.verification import Verification
 from paystacklib.refund import Refund
 from paystacklib.bank import Bank
+from paystacklib.charge import Charge
