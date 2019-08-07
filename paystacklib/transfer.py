@@ -50,3 +50,35 @@ class Transfer(BaseApi):
         uri = paystacklib.api_base + cls.object_type + '/bulk'
         return cls(uri=uri, method='post', params=params).execute()
 
+    @classmethod
+    def check_balance(cls):
+        uri = paystacklib.api_base + '/balance'
+        return cls(uri=uri, method='get').execute()
+
+    @classmethod
+    def resend_otp(cls, transfer_code, reason):
+        params = copy.deepcopy(locals())
+        params = clean_params(params)
+        uri = paystacklib.api_base + cls.object_type + '/resend_otp'
+        return cls(uri=uri, method='post', params=params).execute()
+
+    @classmethod
+    def disable_otp(cls):
+        params = copy.deepcopy(locals())
+        params = clean_params(params)
+        uri = paystacklib.api_base + cls.object_type + '/disable_otp'
+        return cls(uri=uri, method='post', params=params).execute()
+
+    @classmethod
+    def disable_otp_finalize(cls, otp):
+        params = copy.deepcopy(locals())
+        params = clean_params(params)
+        uri = paystacklib.api_base + cls.object_type + '/disable_otp_finalize'
+        return cls(uri=uri, method='post', params=params).execute()
+
+    @classmethod
+    def enable_otp(cls):
+        params = copy.deepcopy(locals())
+        params = clean_params(params)
+        uri = paystacklib.api_base + cls.object_type + '/enable_otp'
+        return cls(uri=uri, method='post', params=params).execute()
