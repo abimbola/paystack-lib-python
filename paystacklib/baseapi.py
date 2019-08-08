@@ -1,5 +1,6 @@
 import requests
 import paystacklib
+from paystacklib.dictwrapper import DictWrapper
 from paystacklib.utils import get_header
 
 class BaseApi:
@@ -22,7 +23,7 @@ class BaseApi:
             result = req(self.uri, headers=self.headers, json=self.params)
         elif self.method == 'delete':
             result = req(self.uri, headers=self.headers)
-        return result.json()
+        return DictWrapper(result.json())
 
 
 
