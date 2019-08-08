@@ -17,3 +17,4 @@ from paystacklib.bank import Bank
 from paystacklib.charge import Charge
 from paystacklib.refund import Refund
 from paystacklib.settlement import Settlement
+from paystacklib.bulkcharge import BulkCharge
