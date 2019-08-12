@@ -19,3 +19,4 @@ from paystacklib.refund import Refund
 from paystacklib.settlement import Settlement
 from paystacklib.bulkcharge import BulkCharge
 from paystacklib.paymentsessiontimeout import PaymentSessionTimeout
+from paystacklib.invoice import Invoice
