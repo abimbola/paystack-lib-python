@@ -1,5 +1,5 @@
 # paystack-lib-python
-This library provides an implementation of the Paystack API with a focus on completeness, production readiness and ease of use.
+This library provides a Python implementation of the Paystack API.
 
 ## Installation
 ```
