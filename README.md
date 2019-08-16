@@ -10,7 +10,7 @@ pip3 install --upgrade paystacklib
 Python 3.5+
 
 ## Usage
-The Paystack secret key should be defined in the Environment as `PAYSTACK_SK` or assigned to `paystacklib.api_key`
+The Paystack secret key should be defined in the Environment as `PAYSTACK_SK` or assigned to `paystacklib.secret_key`
 
 ```
 >>> import paystacklib
