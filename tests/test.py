@@ -1,7 +1,7 @@
 import paystacklib
 import os
-from paystacklib.transaction import *
-from paystacklib.customer import *
+from paystacklib.api.transaction import *
+from paystacklib.api.customer import *
 
 import unittest
 paystacklib.secret_key = os.environ['PAYSTACK_SK']
