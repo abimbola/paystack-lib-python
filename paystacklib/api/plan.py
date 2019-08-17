@@ -1,11 +1,11 @@
 
 import paystacklib
-from paystacklib.baseapi import BaseApi
-from paystacklib.utils import clean_params
+from paystacklib.base.baseapi import BaseApi
+from paystacklib.util.utils import clean_params
 import copy
 
-class Product(BaseApi):
-    object_type = '/product'
+class Plan(BaseApi):
+    object_type = '/plan'
     def __init__(
             self, secret_key=None,
             uri=paystacklib.api_base + object_type, method=None, 
@@ -14,8 +14,8 @@ class Product(BaseApi):
 
     @classmethod
     def create(
-            cls, name, description, price, currency, limited=None,
-            quantity=None):
+            cls, name, amount, interval, description=None, send_invoices=None,
+            send_sms=None, currency=None, invoice_limit=None):
         params = copy.deepcopy(locals())
         params = clean_params(params)
         uri = paystacklib.api_base + cls.object_type
@@ -23,25 +23,27 @@ class Product(BaseApi):
 
 
     @classmethod
-    def list(cls):
+    def list(
+            cls, per_page=50, page=1, interval=None, amount=None): 
         params = copy.deepcopy(locals())
         params = clean_params(params)
         uri = paystacklib.api_base + cls.object_type 
         return cls(uri=uri, method='get', params=params).execute()
 
     @classmethod
-    def fetch(cls, product_id):
+    def fetch(cls, id_or_plan_code):
         uri = paystacklib.api_base + \
-            '{0}/{1}'.format(cls.object_type, str(product_id))
+            '{0}/{1}'.format(cls.object_type, str(id_or_plan_code))
         return cls(uri=uri, method='get').execute() 
 
     @classmethod    
     def update(
-            cls, product_id, name=None, description=None, price=None, currency=None,
-            limited=None, quantity=None): 
+            cls, id_or_plan_code, name=None, 
+            amount=None, description=None, send_invoices=None,
+            send_sms=None, currency=None, invoice_limit=None): 
         params = copy.deepcopy(locals())
         params = clean_params(params)
         uri = paystacklib.api_base + \
-            '{0}/{1}'.format(cls.object_type, str(product_id)) 
+            '{0}/{1}'.format(cls.object_type, str(id_or_plan_code)) 
         return cls(uri=uri, method='put', params=params).execute()
 

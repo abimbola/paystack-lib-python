@@ -1,7 +1,7 @@
 
 import paystacklib
-from paystacklib.baseapi import BaseApi
-from paystacklib.utils import clean_params
+from paystacklib.base.baseapi import BaseApi
+from paystacklib.util.utils import clean_params
 import copy
 
 class Subscription(BaseApi):

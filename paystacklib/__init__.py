@@ -1,22 +1,21 @@
 secret_key = None
 api_base = 'https://api.paystack.co'
 
-
-from paystacklib.transaction import Transaction
-from paystacklib.customer import Customer
-from paystacklib.subaccount import SubAccount
-from paystacklib.page import Page
-from paystacklib.product import Product
-from paystacklib.plan import Plan
-from paystacklib.transfer import Transfer
-from paystacklib.transferrecipient import TransferRecipient
-from paystacklib.subscription import Subscription
-from paystacklib.verification import Verification
-from paystacklib.refund import Refund
-from paystacklib.bank import Bank
-from paystacklib.charge import Charge
-from paystacklib.refund import Refund
-from paystacklib.settlement import Settlement
-from paystacklib.bulkcharge import BulkCharge
-from paystacklib.paymentsessiontimeout import PaymentSessionTimeout
-from paystacklib.invoice import Invoice
+from paystacklib.base.baseapi import BaseApi
+from paystacklib.api.transaction import Transaction
+from paystacklib.api.customer import Customer
+from paystacklib.api.subaccount import SubAccount
+from paystacklib.api.page import Page
+from paystacklib.api.product import Product
+from paystacklib.api.plan import Plan
+from paystacklib.api.transfer import Transfer
+from paystacklib.api.transferrecipient import TransferRecipient
+from paystacklib.api.subscription import Subscription
+from paystacklib.api.verification import Verification
+from paystacklib.api.refund import Refund
+from paystacklib.api.bank import Bank
+from paystacklib.api.charge import Charge
+from paystacklib.api.settlement import Settlement
+from paystacklib.api.bulkcharge import BulkCharge
+from paystacklib.api.paymentsessiontimeout import PaymentSessionTimeout
+from paystacklib.api.invoice import Invoice

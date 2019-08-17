@@ -1,7 +1,7 @@
 import requests
 import paystacklib
-from paystacklib.dictwrapper import DictWrapper
-from paystacklib.utils import get_header
+from paystacklib.base.dictwrapper import DictWrapper
+from paystacklib.util.utils import get_header
 
 class BaseApi:
     def __init__(
