@@ -1,8 +1,6 @@
-
 import paystacklib
 from paystacklib.base.baseapi import BaseApi
 from paystacklib.util.utils import clean_params
-import copy
 
 class Invoice(BaseApi):
     object_type = '/paymentrequest'
@@ -18,8 +16,7 @@ class Invoice(BaseApi):
             line_items=None, tax=None, currency=None, 
             metadata=None, send_notification=None, subaccount=None, 
             draft=None, has_invoice=None, invoice_number=None):
-        params = copy.deepcopy(locals())
-        params = clean_params(params)
+        params = clean_params(locals())
         uri = paystacklib.api_base + cls.object_type 
         return cls(uri=uri, method='post', params=params).execute() 
 
@@ -33,8 +30,7 @@ class Invoice(BaseApi):
     def list(
             cls, customer=None, status=None, currency=None, 
             paid=None, include_archive=None): 
-        params = copy.deepcopy(locals())
-        params = clean_params(params)
+        params = clean_params(locals())
         uri = paystacklib.api_base + cls.object_type
         return cls(method='get', params=params).execute()
 
@@ -58,12 +54,11 @@ class Invoice(BaseApi):
 
     @classmethod
     def finalize(cls, id_or_code, send_notification=None):
-        params = copy.deepcopy(locals())
+        params = clean_params(locals())
         del params['id_or_code'] #not passed in body or as query param
-        params = clean_params(params)
         uri = paystacklib.api_base + \
             '{0}/finalize/{1}'.format(cls.object_type, str(id_or_code))
-        return cls(uri=uri, method='post').execute()
+        return cls(uri=uri, method='post', params=params).execute()
 
     @classmethod
     def update(
@@ -71,8 +66,7 @@ class Invoice(BaseApi):
             description=None, line_items=None, tax=None, currency=None,
             metadata=None, send_notification=None
             ):
-        params = copy.deepcopy(locals())
-        params = clean_params(params)
+        params = clean_params(locals())
         uri = paystacklib.api_base + \
             '{0}/{1}'.format(cls.object_type, str(id_or_code))
         return cls(uri=uri, method='put', params=params).execute()

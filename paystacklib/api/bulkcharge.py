@@ -1,8 +1,6 @@
-
 import paystacklib
 from paystacklib.base.baseapi import BaseApi
 from paystacklib.util.utils import clean_params
-import copy
 
 class BulkCharge(BaseApi):
     object_type = '/bulkcharge'
@@ -20,8 +18,7 @@ class BulkCharge(BaseApi):
 
     @classmethod
     def list(cls, perPage=None, page=None):
-        params = copy.deepcopy(locals())
-        params = clean_params(params)
+        params = clean_params(locals())
         uri = paystacklib.api_base + cls.object_type 
         return cls(uri=uri, method='get', params=params).execute()
 
@@ -35,11 +32,10 @@ class BulkCharge(BaseApi):
     @classmethod
     def fetch_charges_in_batch(cls, id_or_code, status=None, perPage=None,
             page=None):
-        params = copy.deepcopy(locals())
+        params = clean_params(locals())
         uri = paystacklib.api_base + \
             '{0}/{1}/charges'.format(cls.object_type, str(id_or_code))
         del params['id_or_code']
-        params = clean_params(params)
         return cls(uri=uri, method='get', params=params).execute()
 
     @classmethod

@@ -1,8 +1,6 @@
-
 import paystacklib
 from paystacklib.base.baseapi import BaseApi
 from paystacklib.util.utils import clean_params
-import copy
 
 class Settlement(BaseApi):
     object_type = '/settlement'
@@ -16,10 +14,10 @@ class Settlement(BaseApi):
     @classmethod
     def list(
             cls, fr=None, to=None, subaccount=None): 
-        params = copy.deepcopy(locals())
-        params['from'] = params['fr'] #from is a keyword in Python
-        del params['fr']
-        params = clean_params(params)
+        params = clean_params(locals())
+        if 'fr' in params.keys():
+            params['from'] = params['fr'] #from is a keyword in Python
+            del params['fr']
         uri = paystacklib.api_base + cls.object_type 
         return cls(uri=uri, method='get', params=params).execute()
 
