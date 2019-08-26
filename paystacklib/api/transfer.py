@@ -1,8 +1,6 @@
-
 import paystacklib
 from paystacklib.base.baseapi import BaseApi
 from paystacklib.util.utils import clean_params
-import copy
 
 class Transfer(BaseApi):
     object_type = '/transfer'
@@ -15,15 +13,13 @@ class Transfer(BaseApi):
     @classmethod
     def initiate(cls, amount, recipient, source='balance', currency=None,
             reason=None, reference=None): 
-        params = copy.deepcopy(locals())
-        params = clean_params(params)
+        params = clean_params(locals())
         uri = paystacklib.api_base + cls.object_type
         return cls(uri=uri, method='post', params=params).execute() 
 
     @classmethod
     def list(cls, perPage=None, page=None):
-        params = copy.deepcopy(locals())
-        params = clean_params(params)
+        params = clean_params(locals())
         uri = paystacklib.api_base + cls.object_type 
         return cls(uri=uri, method='get', params=params).execute()
 
@@ -35,8 +31,7 @@ class Transfer(BaseApi):
 
     @classmethod    
     def finalize(cls, transfer_code, otp):
-        params = copy.deepcopy(locals())
-        params = clean_params(params)
+        params = clean_params(locals())
         uri = paystacklib.api_base + cls.object_type + '/finalize_transfer' 
         return cls(uri=uri, method='post', params=params).execute()
 
@@ -57,28 +52,24 @@ class Transfer(BaseApi):
 
     @classmethod
     def resend_otp(cls, transfer_code, reason):
-        params = copy.deepcopy(locals())
-        params = clean_params(params)
+        params = clean_params(locals())
         uri = paystacklib.api_base + cls.object_type + '/resend_otp'
         return cls(uri=uri, method='post', params=params).execute()
 
     @classmethod
     def disable_otp(cls):
-        params = copy.deepcopy(locals())
-        params = clean_params(params)
+        params = clean_params(locals())
         uri = paystacklib.api_base + cls.object_type + '/disable_otp'
         return cls(uri=uri, method='post', params=params).execute()
 
     @classmethod
     def disable_otp_finalize(cls, otp):
-        params = copy.deepcopy(locals())
-        params = clean_params(params)
+        params = clean_params(locals())
         uri = paystacklib.api_base + cls.object_type + '/disable_otp_finalize'
         return cls(uri=uri, method='post', params=params).execute()
 
     @classmethod
     def enable_otp(cls):
-        params = copy.deepcopy(locals())
-        params = clean_params(params)
+        params = clean_params(locals())
         uri = paystacklib.api_base + cls.object_type + '/enable_otp'
         return cls(uri=uri, method='post', params=params).execute()

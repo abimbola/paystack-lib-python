@@ -1,8 +1,6 @@
-
 import paystacklib
 from paystacklib.base.baseapi import BaseApi
 from paystacklib.util.utils import clean_params
-import copy
 
 class Plan(BaseApi):
     object_type = '/plan'
@@ -16,8 +14,7 @@ class Plan(BaseApi):
     def create(
             cls, name, amount, interval, description=None, send_invoices=None,
             send_sms=None, currency=None, invoice_limit=None):
-        params = copy.deepcopy(locals())
-        params = clean_params(params)
+        params = clean_params(locals())
         uri = paystacklib.api_base + cls.object_type
         return cls(uri=uri, method='post', params=params).execute() 
 
@@ -25,8 +22,7 @@ class Plan(BaseApi):
     @classmethod
     def list(
             cls, per_page=50, page=1, interval=None, amount=None): 
-        params = copy.deepcopy(locals())
-        params = clean_params(params)
+        params = clean_params(locals())
         uri = paystacklib.api_base + cls.object_type 
         return cls(uri=uri, method='get', params=params).execute()
 
@@ -41,8 +37,7 @@ class Plan(BaseApi):
             cls, id_or_plan_code, name=None, 
             amount=None, description=None, send_invoices=None,
             send_sms=None, currency=None, invoice_limit=None): 
-        params = copy.deepcopy(locals())
-        params = clean_params(params)
+        params = clean_params(locals())
         uri = paystacklib.api_base + \
             '{0}/{1}'.format(cls.object_type, str(id_or_plan_code)) 
         return cls(uri=uri, method='put', params=params).execute()

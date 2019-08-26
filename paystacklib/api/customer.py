@@ -1,8 +1,6 @@
-
 import paystacklib
 from paystacklib.base.baseapi import BaseApi
 from paystacklib.util.utils import clean_params
-import copy
 
 class Customer(BaseApi):
     object_type = '/customer'
@@ -17,8 +15,7 @@ class Customer(BaseApi):
             cls, email, 
             first_name=None, last_name=None, phone=None, 
             metadata=None): 
-        params = copy.deepcopy(locals())
-        params = clean_params(params)
+        params = clean_params(locals())
         uri = paystacklib.api_base + cls.object_type
         return cls(uri=uri, method='post', params=params).execute() 
 
@@ -26,8 +23,7 @@ class Customer(BaseApi):
     @classmethod
     def list(
             cls, per_page=50, page=1): 
-        params = copy.deepcopy(locals())
-        params = clean_params(params)
+        params = clean_params(locals())
         uri = paystacklib.api_base + cls.object_type 
         return cls(uri=uri, method='get', params=params).execute()
 
@@ -41,8 +37,7 @@ class Customer(BaseApi):
     def update(
             cls, id_or_customer_code, first_name=None, 
             last_name=None, phone=None, metadata=None): 
-        params = copy.deepcopy(locals())
-        params = clean_params(params)
+        params = clean_params(locals())
         uri = paystacklib.api_base + cls.object_type + '/id_or_customer_code'
         return cls(uri=uri, method='put', params=params).execute()
 
@@ -50,16 +45,14 @@ class Customer(BaseApi):
     @classmethod
     def set_risk_action(
             cls, customer, risk_action=None): 
-        params = copy.deepcopy(locals())
-        params = clean_params(params)
+        params = clean_params(locals())
         uri = paystacklib.api_base + cls.object_type + '/set_risk_action'
         return cls(uri=uri, method='post', params=params).execute()
 
     @classmethod
     def deactivate_authorization(
             cls, authorization_code): 
-        params = copy.deepcopy(locals())
-        params = clean_params(params)
+        params = clean_params(locals())
         uri = paystacklib.api_base + cls.object_type + '/deactivate_authorization'
         return cls(uri=uri, method='post', params=params).execute() 
 

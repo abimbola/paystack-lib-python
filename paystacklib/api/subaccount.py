@@ -1,8 +1,6 @@
-
 import paystacklib
 from paystacklib.base.baseapi import BaseApi
 from paystacklib.util.utils import clean_params
-import copy
 
 class SubAccount(BaseApi):
     object_type = '/subaccount'
@@ -18,8 +16,7 @@ class SubAccount(BaseApi):
             percentage_charge, primary_contact_email=None, 
             primary_contact_name=None, primary_contact_phone=None, 
             metadata=None, settlement_schedule=None): 
-        params = copy.deepcopy(locals())
-        params = clean_params(params)
+        params = clean_params(locals())
         uri = paystacklib.api_base + cls.object_type
         return cls(uri=uri, method='post', params=params).execute() 
 
@@ -27,8 +24,7 @@ class SubAccount(BaseApi):
     @classmethod
     def list(
             cls, per_page=50, page=1): 
-        params = copy.deepcopy(locals())
-        params = clean_params(params)
+        params = clean_params(locals())
         uri = paystacklib.api_base + cls.object_type 
         return cls(uri=uri, method='get', params=params).execute()
 
@@ -45,8 +41,7 @@ class SubAccount(BaseApi):
             primary_contact_email=None, description=None, 
             primary_contact_name=None, primary_contact_phone=None,
             metadata=None, settlement_schedule=None): 
-        params = copy.deepcopy(locals())
-        params = clean_params(params)
+        params = clean_params(locals())
         uri = paystacklib.api_base + \
             '{0}/{1}'.format(cls.object_type, str(id_or_slug)) 
         return cls(uri=uri, method='put', params=params).execute()
