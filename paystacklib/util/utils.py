@@ -1,5 +1,5 @@
 import os
-
+import copy
 
 
 def get_header(secret_key=None):
@@ -18,6 +18,7 @@ def get_header(secret_key=None):
     return header
 
 
-def clean_params(params):
+def clean_params(orig_params):
+    params = copy.deepcopy(orig_params)
     params = {item:params[item] for item in params.keys() if params[item] is not None and item is not 'cls'}
     return params
