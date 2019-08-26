@@ -1,8 +1,6 @@
-
 import paystacklib
 from paystacklib.base.baseapi import BaseApi
 from paystacklib.util.utils import clean_params
-import copy
 
 class Refund(BaseApi):
     object_type = '/refund'
@@ -16,8 +14,7 @@ class Refund(BaseApi):
     def create(
             cls, transaction, amount=None, currency=None,
             customer_note=None, merchant_note=None):
-        params = copy.deepcopy(locals())
-        params = clean_params(params)
+        params = clean_params(locals())
         uri = paystacklib.api_base + cls.object_type
         return cls(uri=uri, method='post', params=params).execute() 
 
@@ -25,8 +22,7 @@ class Refund(BaseApi):
     @classmethod
     def list(
             cls, reference=None, currency=None): 
-        params = copy.deepcopy(locals())
-        params = clean_params(params)
+        params = clean_params(locals())
         uri = paystacklib.api_base + cls.object_type 
         return cls(uri=uri, method='get', params=params).execute()
 

@@ -1,8 +1,6 @@
-
 import paystacklib
 from paystacklib.base.baseapi import BaseApi
 from paystacklib.util.utils import clean_params
-import copy
 
 class Charge(BaseApi):
     object_type = '/charge'
@@ -37,29 +35,25 @@ class Charge(BaseApi):
 
     @classmethod    
     def submit_pin(cls, pin, reference):
-        params = copy.deepcopy(locals())
-        params = clean_params(params)
+        params = clean_params(locals())
         uri = paystacklib.api_base + cls.object_type + '/submit_pin' 
         return cls(uri=uri, method='post', params=params).execute()
 
     @classmethod    
     def submit_otp(cls, otp, reference):
-        params = copy.deepcopy(locals())
-        params = clean_params(params)
+        params = clean_params(locals())
         uri = paystacklib.api_base + cls.object_type + '/submit_otp'
         return cls(uri=uri, method='post', params=params).execute()
     
     @classmethod
     def submit_phone(cls, phone, reference):
-        params = copy.deepcopy(locals())
-        params = clean_params(params)
+        params = clean_params(locals())
         uri = paystacklib.api_base + cls.object_type + '/submit_phone'
         return cls(uri=uri, method='post', params=params).execute()
 
     @classmethod
     def submit_birthday(cls, birthday, reference):
-        params = copy.deepcopy(locals())
-        params = clean_params(params)
+        params = clean_params(locals())
         uri = paystacklib.api_base + cls.object_type + '/submit_birthday'
         return cls(uri=uri, method='post', params=params).execute()
 

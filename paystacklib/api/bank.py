@@ -1,8 +1,6 @@
-
 import paystacklib
 from paystacklib.base.baseapi import BaseApi
 from paystacklib.util.utils import clean_params
-import copy
 
 class Bank(BaseApi):
     object_type = '/bank'
@@ -16,8 +14,7 @@ class Bank(BaseApi):
     @classmethod
     def list(
             cls, perPage=50, page=1): 
-        params = copy.deepcopy(locals())
-        params = clean_params(params)
+        params = clean_params(locals())
         uri = paystacklib.api_base + cls.object_type 
         return cls(uri=uri, method='get', params=params).execute()
 
